@@ -4,3 +4,7 @@ functions:
     path: attach.ts:attachImage
     command:
       name: "Attach: Image"
+  attachDailyImage:
+    path: attach.ts:attachDailyImage
+    command:
+      name: "Attach: Daily image"
