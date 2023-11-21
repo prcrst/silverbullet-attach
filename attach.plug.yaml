@@ -1,0 +1,6 @@
+name: attach
+functions:
+  attachImage:
+    path: attach.ts:attachImage
+    command:
+      name: "Attach: Image"
