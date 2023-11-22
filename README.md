@@ -5,6 +5,10 @@ The plugin lets you attach images to you silverbullet pages via slash commands (
 
 The slash commands should be preferred, use `/attach` to insert a file or `/camera` to upload a photo taken with a camera.
 
+There are three settings to control where certain types of uploads go:
+- `attachImagePrefix`: generic attached image location, defaults to: `images`
+- `cameraImagePrefix`: location for images uploaded from the camera, defaults to: `images/camera`
+- `dailyImagePrefix`: location for the daily images, defaults to: `images/daily`
 
 ## Build
 To build this plug, make sure you have [SilverBullet installed](https://silverbullet.md/Install). Then, build the plug with:
