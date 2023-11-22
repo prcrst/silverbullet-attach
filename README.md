@@ -1,9 +1,16 @@
 
 # SilverBullet attachment plugin
 
-The plugin lets you attach images to you silverbullet pages via slash commands (and commands).
+The plugin lets you attach images to you silverbullet pages via slash commands and commands.
 
-The slash commands should be preferred, use `/attach` to insert a file or `/camera` to upload a photo taken with a camera.
+Slash commands:
+- `attach`: Uploads an image, lets the user confirm/change the name before saving
+- `camera`: Uploads an image from the camera (on desktop it just opens the file picker), lets the user confirm/change the name before saving
+- `attachHere`: Uploads an image into a path corresponding to the current page, no confirmation
+
+Commands:
+- `Attach: Daily image`: Uploads an image into the daily image folder with a name pattern, lets the user confirm/change the name before saving
+- `Attach: Camera image`: Uploads a camera image, lets the user confirm/change the name before saving
 
 There are three settings to control where certain types of uploads go:
 - `attachImagePrefix`: generic attached image location, defaults to: `images`
