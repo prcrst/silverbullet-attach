@@ -39,6 +39,19 @@ export async function attachDailyImage() {
   }
 }
 
+export async function attachImageQuiet(prefix: string | null = null, capture: string | null = null) {
+  const { attachImagePrefix } = await readSettings({
+    attachImagePrefix: "images",
+  });
+
+  prefix ??= attachImagePrefix;
+
+  const uploadFile = await editor.uploadFile("image/*", capture);
+  const uploadName = `${prefix}/${uploadFile.name}`;
+  await space.writeAttachment(uploadName, uploadFile.content);
+  editor.insertAtCursor(`![](${uploadName})`);
+}
+
 export async function insertImage(_ctx: any) {
   attachImage();
 }
