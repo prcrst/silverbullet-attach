@@ -8,7 +8,6 @@ export async function attachImage(prefix: string | null = null, capture: string 
   });
 
   prefix ??= attachImagePrefix;
-  console.log(prefix)
 
   const uploadFile = await editor.uploadFile("image/*", capture);
   const uploadName = await editor.prompt("Name:", `${prefix}/${uploadFile.name}`);
@@ -17,7 +16,6 @@ export async function attachImage(prefix: string | null = null, capture: string 
     editor.insertAtCursor(`![](${uploadName})`);
   }
 }
-
 
 export async function attachCameraImage() {
   const { cameraImagePrefix } = await readSettings({
