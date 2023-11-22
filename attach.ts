@@ -1,25 +1,50 @@
-import { editor } from "$sb/silverbullet-syscall/mod.ts";
+import { editor, space } from "$sb/silverbullet-syscall/mod.ts";
+import { readSettings } from "$sb/lib/settings_page.ts";
 import { niceDate, niceTime } from "$sb/lib/dates.ts";
 
-export async function attachCameraImage() {
-  const uploadName = await editor.prompt("The name for the upload:", `images/camera/${niceDate(new Date())}_${niceTime(new Date())}.jpg`);
+export async function attachImage(prefix: string | null = null, capture: string | null = null) {
+  const { attachImagePrefix } = await readSettings({
+    attachImagePrefix: "images",
+  });
+
+  prefix ??= attachImagePrefix;
+  console.log(prefix)
+
+  const uploadFile = await editor.uploadFile("image/*", capture);
+  const uploadName = await editor.prompt("Name:", `${prefix}/${uploadFile.name}`);
   if (uploadName) {
-    editor.attachFile(uploadName, "image/jpeg", "environment");
+    await space.writeAttachment(uploadName, uploadFile.content);
+    editor.insertAtCursor(`![](${uploadName})`);
   }
+}
+
+
+export async function attachCameraImage() {
+  const { cameraImagePrefix } = await readSettings({
+    cameraImagePrefix: "images/camera",
+  });
+
+  attachImage(cameraImagePrefix, "environment");
 }
 
 export async function attachDailyImage() {
-  const uploadName = await editor.prompt("The name for the daily image:", `images/daily/${niceDate(new Date())}.jpg`);
+  const { dailyImagePrefix } = await readSettings({
+    dailyImagePrefix: "images/daily",
+  });
+
+  const uploadFile = await editor.uploadFile("image/*");
+  const suffix = uploadFile.name.split('.').pop();
+  const uploadName = await editor.prompt("Daily image name:", `${dailyImagePrefix}/${niceDate(new Date())}.${suffix}`);
   if (uploadName) {
-    editor.attachFile(uploadName, "image/jpeg");
+    await space.writeAttachment(uploadName, uploadFile.content);
+    editor.insertAtCursor(`![](${uploadName})`);
   }
 }
 
-export async function insertImage(environment: string | null = null) {
-  const fileName = await editor.attachFile(null, "image/*", environment);
-  await editor.insertAtCursor(`![](${fileName})`);
+export async function insertImage(_ctx: any) {
+  attachImage();
 }
 
-export async function insertCameraImage() {
-  await insertImage("environment");
+export async function insertCameraImage(_ctx: any) {
+  attachCameraImage();
 }
