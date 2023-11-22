@@ -8,7 +8,7 @@ functions:
   attachCameraImage:
     path: attach.ts:attachCameraImage
     command:
-      name: "Attach: Camera Image"
+      name: "Attach: Camera image"
 
   # Slash commands
   insertImage:
@@ -22,3 +22,9 @@ functions:
     slashCommand:
       name: camera
       description: Attach an image from the device camera
+
+  insertRelativeImage:
+    path: attach.ts:insertImageRelative
+    slashCommand:
+      name: attachHere
+      description: Attach an image and save according to the page path

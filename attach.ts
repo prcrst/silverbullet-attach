@@ -59,3 +59,8 @@ export async function insertImage(_ctx: any) {
 export async function insertCameraImage(_ctx: any) {
   attachCameraImage();
 }
+
+export async function insertImageRelative(_ctx: any) {
+  const page = await editor.getCurrentPage();
+  attachImageQuiet(page);
+}
