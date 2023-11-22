@@ -1,10 +1,24 @@
 name: attach
 functions:
-  attachImage:
-    path: attach.ts:attachImage
-    command:
-      name: "Attach: Image"
   attachDailyImage:
     path: attach.ts:attachDailyImage
     command:
       name: "Attach: Daily image"
+
+  attachCameraImage:
+    path: attach.ts:attachCameraImage
+    command:
+      name: "Attach: Camera Image"
+
+  # Slash commands
+  insertImage:
+    path: attach.ts:insertImage
+    slashCommand:
+      name: attach
+      description: Attach an image
+
+  insertCameraImage:
+    path: attach.ts:insertCameraImage
+    slashCommand:
+      name: camera
+      description: Attach an image from the device camera
