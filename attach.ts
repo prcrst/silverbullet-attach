@@ -17,9 +17,6 @@ export async function attachDailyImage() {
 
 export async function insertImage(environment: string | null = null) {
   const fileName = await editor.attachFile(null, "image/*", environment);
-  console.log(`Attached file: ${fileName}`);
-  const cursorPos = await editor.getCursor();
-  const page = await editor.getCurrentPage();
   await editor.insertAtCursor(`![](${fileName})`);
 }
 
