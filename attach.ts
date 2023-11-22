@@ -13,7 +13,7 @@ export async function attachImage(prefix: string | null = null, capture: string 
   const uploadName = await editor.prompt("Name:", `${prefix}/${uploadFile.name}`);
   if (uploadName) {
     await space.writeAttachment(uploadName, uploadFile.content);
-    editor.insertAtCursor(`![](${uploadName})`);
+    await editor.insertAtCursor(`![](${uploadName})`);
   }
 }
 
@@ -22,7 +22,7 @@ export async function attachCameraImage() {
     cameraImagePrefix: "images/camera",
   });
 
-  attachImage(cameraImagePrefix, "environment");
+  await attachImage(cameraImagePrefix, "environment");
 }
 
 export async function attachDailyImage() {
@@ -35,7 +35,7 @@ export async function attachDailyImage() {
   const uploadName = await editor.prompt("Daily image name:", `${dailyImagePrefix}/${niceDate(new Date())}.${suffix}`);
   if (uploadName) {
     await space.writeAttachment(uploadName, uploadFile.content);
-    editor.insertAtCursor(`![](${uploadName})`);
+    await editor.insertAtCursor(`![](${uploadName})`);
   }
 }
 
@@ -49,7 +49,7 @@ export async function attachImageQuiet(prefix: string | null = null, capture: st
   const uploadFile = await editor.uploadFile("image/*", capture);
   const uploadName = `${prefix}/${uploadFile.name}`;
   await space.writeAttachment(uploadName, uploadFile.content);
-  editor.insertAtCursor(`![](${uploadName})`);
+  await editor.insertAtCursor(`![](${uploadName})`);
 }
 
 export async function insertImage(_ctx: any) {
